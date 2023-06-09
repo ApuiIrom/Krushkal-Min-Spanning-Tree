@@ -1,0 +1,43 @@
+#include<stdio.h>;
+void main()
+{
+int n, v, u,cost[10][10], visited[10]={0}, i, j;
+int count=1, mincost=0, min, a, b;
+printf("Enter number of vertices:");
+scanf("%d",&n);
+printf("\nEnter cost matrix (For infinity, put 999):\n");
+for(i=1;i<=n;i++)
+for(j=1;j<=n;j++)
+{
+scanf("%d",&cost[i][j]);
+if(cost[i][j]==0)
+cost[i][j]=999;
+
+}
+printf("\nThe edges of spanning tree are: \n");
+while(count<n)
+{
+min=999;
+for(i=1;i<=n;i++) {
+for(j=1;j<=n;j++) {
+if(cost[i][j]<min) {
+if(!(visited[i]==1 && visited[j]==1)) //(visited[i]!=0)
+{
+min=cost[i][j];
+a=u=i;
+b=v=j;
+}
+}
+}
+}
+count++;
+printf("\nEdge(%d, %d) = %d", a, b, min);
+cost[a][b]=cost[b][a]=999;
+mincost+=min;
+if(visited[b]==1)
+visited[a]=1;
+else
+    visited[b]=1;
+}
+printf("\nMinimum cost = %d", mincost);
+}
